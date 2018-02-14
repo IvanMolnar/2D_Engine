@@ -1,1 +1,1 @@
-# 2D_Engine
+2D engine using SDL library
