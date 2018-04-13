@@ -83,7 +83,7 @@ void Render::loadTexture(MyObjectDisplayData* object)
 {
 
 	//Load PNG texture
-	(*object).gTexture = loadTexture("..\\engine\\textures\\512X512.png");
+	(*object).gTexture = loadTexture("..\\DesignPatternDemo\\textures\\512X512.png");
 
 	if ((*object).gTexture == NULL)
 	{

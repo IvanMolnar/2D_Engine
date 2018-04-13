@@ -16,5 +16,6 @@ class GraphicEngineInterface
 public:
 	virtual void init() = 0;
 	virtual void tick(std::vector<MyObjectDisplayData*>* renderData = nullptr) = 0;
+	virtual void loadTexture(MyObjectDisplayData* object) = 0;
 	virtual void destroy() = 0;
 };
