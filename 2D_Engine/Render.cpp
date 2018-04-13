@@ -16,6 +16,7 @@ Render::Render()
 
 Render::~Render()
 {
+	close();
 }
 
 
@@ -118,7 +119,7 @@ void Render::tick()
 
 	//While application is running
 	while (!quit)
-	{
+	{/*
 		//Handle events on queue
 		while (SDL_PollEvent(&e) != 0)
 		{
@@ -127,14 +128,19 @@ void Render::tick()
 			{
 				quit = true;
 			}
-		}
+		}*/
 
 		//Clear screen
 		SDL_RenderClear(m_Renderer);
 
-		SDL_Rect destination = { 0, 0, 50, 50 };
+		for (auto& object : _renderObject)
+		{
+			SDL_RenderCopy(m_Renderer, object.gTexture, NULL, &object.destination);
+		}
+
+	//	SDL_Rect destination = { 0, 0, 50, 50 };
 		//Render texture to screen
-		SDL_RenderCopy(m_Renderer, gTexture, NULL, &destination);
+	//	SDL_RenderCopy(m_Renderer, gTexture, NULL, &destination);
 
 		//Update screen
 		SDL_RenderPresent(m_Renderer);

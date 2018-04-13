@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include <vector>
+
 class Render
 {
 public:
@@ -43,6 +45,20 @@ private:
 
 
 	//Current displayed texture
-	SDL_Texture* gTexture = NULL;
+	//SDL_Texture* gTexture = NULL;
+
+	struct object
+	{
+		object()
+		{
+			gTexture = nullptr;
+			destination = { 0, 0, 50, 50 };
+		}
+
+		SDL_Texture* gTexture;
+		SDL_Rect destination;
+	};
+
+	std::vector<object> _renderObject;
 };
 
