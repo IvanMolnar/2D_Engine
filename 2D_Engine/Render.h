@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <vector>
+#include "MyObjectDisplayData.h"
 
 class Render
 {
@@ -17,9 +18,13 @@ public:
 	void tick();
 	bool init();
 
+	//test
+	void setRenderTargets(std::vector<MyObjectDisplayData*>* renderData);
+	void loadTexture(MyObjectDisplayData* object);
+
 private:
 	
-	bool loadMedia();
+	
 	void close();
 	
 	SDL_Texture* loadTexture(std::string path);
@@ -46,7 +51,7 @@ private:
 
 	//Current displayed texture
 	//SDL_Texture* gTexture = NULL;
-
+	/*
 	struct object
 	{
 		object()
@@ -57,8 +62,10 @@ private:
 
 		SDL_Texture* gTexture;
 		SDL_Rect destination;
-	};
+	};*/
 
-	std::vector<object> _renderObject;
+	//std::vector<object> _renderObject;
+
+	std::vector<MyObjectDisplayData*>* _renderObject;
 };
 

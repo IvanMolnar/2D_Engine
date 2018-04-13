@@ -71,32 +71,35 @@ bool Render::init()
 		}
 	}
 
-	loadMedia();
-
 	return success;
 }
 
-bool Render::loadMedia()
+void Render::setRenderTargets(std::vector<MyObjectDisplayData*>* renderData)
 {
-	//Loading success flag
-	bool success = true;
+	_renderObject = renderData;
+}
+
+void Render::loadTexture(MyObjectDisplayData* object)
+{
 
 	//Load PNG texture
-	gTexture = loadTexture("..\\engine\\textures\\512X512.png");
-	if (gTexture == NULL)
+	(*object).gTexture = loadTexture("..\\engine\\textures\\512X512.png");
+
+	if ((*object).gTexture == NULL)
 	{
 		printf("Failed to load texture image!\n");
-		success = false;
 	}
-
-	return success;
 }
 
 void Render::close()
 {
-	//Free loaded image
-	SDL_DestroyTexture(gTexture);
-	gTexture = NULL;
+	//Free loaded images
+
+	for (auto& object : *_renderObject)
+	{
+		SDL_DestroyTexture((*object).gTexture);
+		(*object).gTexture = nullptr;
+	}
 
 	//Destroy window	
 	SDL_DestroyRenderer(m_Renderer);
@@ -115,7 +118,7 @@ void Render::tick()
 	bool quit = false;
 
 	//Event handler
-	SDL_Event e;
+	// SDL_Event e;
 
 	//While application is running
 	while (!quit)
@@ -133,9 +136,10 @@ void Render::tick()
 		//Clear screen
 		SDL_RenderClear(m_Renderer);
 
-		for (auto& object : _renderObject)
+		
+		for (auto& object : *_renderObject)
 		{
-			SDL_RenderCopy(m_Renderer, object.gTexture, NULL, &object.destination);
+			SDL_RenderCopy(m_Renderer, (*object).gTexture, NULL, (*object).destination);
 		}
 
 	//	SDL_Rect destination = { 0, 0, 50, 50 };

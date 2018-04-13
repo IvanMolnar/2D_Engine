@@ -294,6 +294,9 @@
     <ClInclude Include="2D_Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MyObjectDisplayData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
