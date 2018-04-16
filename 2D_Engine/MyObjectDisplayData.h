@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 struct position2d
 {
 	position2d(int xPos = 0, int yPos = 0)
@@ -22,5 +24,7 @@ public:
 	int _drawLayer;
 
 	SDL_Texture* gTexture;
+	std::string texturePath;
+
 	SDL_Rect* destination;
 };

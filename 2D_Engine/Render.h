@@ -19,7 +19,8 @@ public:
 	bool init();
 
 	//test
-	void setRenderTargets(std::vector<MyObjectDisplayData*>* renderData);
+	void initObject(MyObjectDisplayData* object);
+	void addObjectToRender(MyObjectDisplayData* object);
 	void loadTexture(MyObjectDisplayData* object);
 
 private:
@@ -66,6 +67,6 @@ private:
 
 	//std::vector<object> _renderObject;
 
-	std::vector<MyObjectDisplayData*>* _renderObject;
+	std::vector<MyObjectDisplayData*> _renderObject;
 };
 

@@ -74,18 +74,24 @@ bool Render::init()
 	return success;
 }
 
-void Render::setRenderTargets(std::vector<MyObjectDisplayData*>* renderData)
+void Render::addObjectToRender(MyObjectDisplayData* object)
 {
-	_renderObject = renderData;
+	_renderObject.push_back(object);
+}
+
+void Render::initObject(MyObjectDisplayData* object)
+{
+	object->gTexture = nullptr;
+	object->destination = new SDL_Rect();
 }
 
 void Render::loadTexture(MyObjectDisplayData* object)
 {
 
 	//Load PNG texture
-	(*object).gTexture = loadTexture("..\\DesignPatternDemo\\textures\\512X512.png");
+	object->gTexture = loadTexture("c:\\Users\\Conduent\\source\\repos\\DPD\\DesignPatternDemo\\textures\\" + object->texturePath);
 
-	if ((*object).gTexture == NULL)
+	if (object->gTexture == NULL)
 	{
 		printf("Failed to load texture image!\n");
 	}
@@ -95,10 +101,11 @@ void Render::close()
 {
 	//Free loaded images
 
-	for (auto& object : *_renderObject)
+	for (auto& object : _renderObject)
 	{
-		SDL_DestroyTexture((*object).gTexture);
-		(*object).gTexture = nullptr;
+		SDL_DestroyTexture(object->gTexture);
+		object->gTexture = nullptr;
+		delete object->destination;
 	}
 
 	//Destroy window	
@@ -121,9 +128,10 @@ void Render::tick()
 	// SDL_Event e;
 
 	//While application is running
-	while (!quit)
-	{/*
+//	while (!quit)
+//	{/*
 		//Handle events on queue
+	/*
 		while (SDL_PollEvent(&e) != 0)
 		{
 			//User requests quit
@@ -137,9 +145,30 @@ void Render::tick()
 		SDL_RenderClear(m_Renderer);
 
 		
-		for (auto& object : *_renderObject)
+		for (auto& object : _renderObject)
 		{
-			SDL_RenderCopy(m_Renderer, (*object).gTexture, NULL, (*object).destination);
+			if (object->_drawLayer == 0)
+			{
+				object->destination->h = 50;
+				object->destination->w = 50;
+				object->destination->x = object->_position.x * 50;
+				object->destination->y = object->_position.y * 50;
+
+				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, object->destination);
+			}
+		}
+
+		for (auto& object : _renderObject)
+		{
+			if (object->_drawLayer == 1)
+			{
+				object->destination->h = 50;
+				object->destination->w = 50;
+				object->destination->x = object->_position.x * 50;
+				object->destination->y = object->_position.y * 50;
+
+				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, object->destination);
+			}
 		}
 
 	//	SDL_Rect destination = { 0, 0, 50, 50 };
@@ -148,9 +177,9 @@ void Render::tick()
 
 		//Update screen
 		SDL_RenderPresent(m_Renderer);
-	}
+//	}
 
-	close();
+	//close();
 }
 
 SDL_Texture* Render::loadTexture(std::string path)
