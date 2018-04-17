@@ -82,14 +82,12 @@ void Render::addObjectToRender(MyObjectDisplayData* object)
 void Render::initObject(MyObjectDisplayData* object)
 {
 	object->gTexture = nullptr;
-	object->destination = new SDL_Rect();
 }
 
 void Render::loadTexture(MyObjectDisplayData* object)
 {
-
 	//Load PNG texture
-	object->gTexture = loadTexture("c:\\Users\\Conduent\\source\\repos\\DPD\\DesignPatternDemo\\textures\\" + object->texturePath);
+	object->gTexture = loadTexture("..\\DesignPatternDemo\\textures\\" + object->texturePath);
 
 	if (object->gTexture == NULL)
 	{
@@ -105,7 +103,6 @@ void Render::close()
 	{
 		SDL_DestroyTexture(object->gTexture);
 		object->gTexture = nullptr;
-		delete object->destination;
 	}
 
 	//Destroy window	
@@ -148,32 +145,28 @@ void Render::tick()
 		for (auto& object : _renderObject)
 		{
 			if (object->_drawLayer == 0)
-			{
+			{/*
 				object->destination->h = 50;
 				object->destination->w = 50;
 				object->destination->x = object->_position.x * 50;
-				object->destination->y = object->_position.y * 50;
+				object->destination->y = object->_position.y * 50;*/
 
-				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, object->destination);
+				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, reinterpret_cast<SDL_Rect*>(&object->_objectRect));
 			}
 		}
 
 		for (auto& object : _renderObject)
 		{
 			if (object->_drawLayer == 1)
-			{
+			{/*
 				object->destination->h = 50;
 				object->destination->w = 50;
 				object->destination->x = object->_position.x * 50;
-				object->destination->y = object->_position.y * 50;
+				object->destination->y = object->_position.y * 50;*/
 
-				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, object->destination);
+				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, reinterpret_cast<SDL_Rect*>(&object->_objectRect));
 			}
 		}
-
-	//	SDL_Rect destination = { 0, 0, 50, 50 };
-		//Render texture to screen
-	//	SDL_RenderCopy(m_Renderer, gTexture, NULL, &destination);
 
 		//Update screen
 		SDL_RenderPresent(m_Renderer);

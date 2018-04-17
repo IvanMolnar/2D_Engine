@@ -14,17 +14,51 @@ struct position2d
 	int y;
 };
 
+struct dimension2d
+{
+	dimension2d(int width = 0, int height = 0)
+	{
+		w = width;
+		h = height;
+	}
+
+	int w;
+	int h;
+};
+
 struct SDL_Texture;
-struct SDL_Rect;
+
+struct ObjectRect
+{
+	void updatePosition(position2d& position)
+	{
+		_x = position.x * _cellSize;
+		_y = position.y * _cellSize;
+	}
+
+	void updateDimenstion(dimension2d& dimension)
+	{
+		_w = dimension.w;
+		_h = dimension.h;
+	}
+
+	int _x;
+	int _y;
+	int _w;
+	int _h;
+	int _cellSize = 50;
+};
 
 class MyObjectDisplayData
 {
 public:
 	position2d _position;
+	dimension2d _dimension;
 	int _drawLayer;
 
-	SDL_Texture* gTexture;
+	
 	std::string texturePath;
 
-	SDL_Rect* destination;
+	SDL_Texture* gTexture;
+	ObjectRect _objectRect;
 };
