@@ -38,7 +38,7 @@ private:
 
 
 
-
+	int cellSize = 50;
 
 
 

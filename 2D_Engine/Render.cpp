@@ -142,7 +142,7 @@ void Render::tick()
 		SDL_RenderClear(m_Renderer);
 
 		
-		for (auto& object : _renderObject)
+		for (MyObjectDisplayData* object : _renderObject)
 		{
 			if (object->_drawLayer == 0)
 			{/*
@@ -151,11 +151,16 @@ void Render::tick()
 				object->destination->x = object->_position.x * 50;
 				object->destination->y = object->_position.y * 50;*/
 
-				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, reinterpret_cast<SDL_Rect*>(&object->_objectRect));
+				int renderXPos = object->_position.x * cellSize;
+				int renderYPos = object->_position.y * cellSize;
+
+				SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
+
+				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
 			}
 		}
 
-		for (auto& object : _renderObject)
+		for (MyObjectDisplayData* object : _renderObject)
 		{
 			if (object->_drawLayer == 1)
 			{/*
@@ -164,7 +169,12 @@ void Render::tick()
 				object->destination->x = object->_position.x * 50;
 				object->destination->y = object->_position.y * 50;*/
 
-				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, reinterpret_cast<SDL_Rect*>(&object->_objectRect));
+				int renderXPos = object->_position.x * cellSize;
+				int renderYPos = object->_position.y * cellSize;
+
+				SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
+
+				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
 			}
 		}
 
