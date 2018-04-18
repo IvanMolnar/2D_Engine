@@ -2,12 +2,13 @@
 
 #include "MyObjectDisplayData.h"
 
+
 #include <vector>
 
 namespace GraphicEngineModuleInfo
 {
 	static const char* DllName = "2D_Engine.dll";
-	static const char* GetInstanceFunction = "getInstance";
+	static const char* GetInstanceFunction = "getInstanceGraphic";
 }
 
 class GraphicEngineInterface
@@ -25,3 +26,4 @@ public:
 	virtual void addObjectsToRender(std::vector<MyObjectDisplayData*>* objects) = 0;
 	virtual void destroy() = 0;
 };
+

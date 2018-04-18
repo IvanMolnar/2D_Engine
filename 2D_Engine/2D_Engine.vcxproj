@@ -160,6 +160,7 @@ copy /Y "$(SolutionDir)2D_Engine\src\Libraries\SDL_Image\lib\x64\*.dll" "$(Targe
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2D_Engine.h" />
+    <ClInclude Include="InputInterface.h" />
     <ClInclude Include="MyObjectDisplayData.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="src\Libraries\SDL\include\begin_code.h" />

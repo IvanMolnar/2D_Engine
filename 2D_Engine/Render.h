@@ -24,6 +24,9 @@ public:
 	void addObjectToRender(MyObjectDisplayData* object);
 	void loadTexture(MyObjectDisplayData* object);
 
+
+	SDL_Scancode getInput();
+
 private:
 	
 	

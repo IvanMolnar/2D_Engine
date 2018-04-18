@@ -95,6 +95,20 @@ void Render::loadTexture(MyObjectDisplayData* object)
 	}
 }
 
+SDL_Scancode Render::getInput()
+{
+	SDL_Event event;
+
+	SDL_WaitEventTimeout(&event, 10);
+	
+	if (event.type == SDL_KEYDOWN)
+	{
+		return event.key.keysym.scancode;
+	}
+
+	return SDL_Scancode::SDL_SCANCODE_UNKNOWN;
+}
+
 void Render::close()
 {
 	//Free loaded images
