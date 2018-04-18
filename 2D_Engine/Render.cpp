@@ -76,7 +76,7 @@ bool Render::init()
 
 void Render::addObjectToRender(MyObjectDisplayData* object)
 {
-	_renderObject.push_back(object);
+	_renderObjects[object->_drawLayer].push_back(object);
 }
 
 void Render::initObject(MyObjectDisplayData* object)
@@ -99,10 +99,13 @@ void Render::close()
 {
 	//Free loaded images
 
-	for (auto& object : _renderObject)
+	for (auto& objectList : _renderObjects)
 	{
-		SDL_DestroyTexture(object->gTexture);
-		object->gTexture = nullptr;
+		for (auto& object : objectList.second)
+		{
+			SDL_DestroyTexture(object->gTexture);
+			object->gTexture = nullptr;
+		}
 	}
 
 	//Destroy window	
@@ -114,6 +117,19 @@ void Render::close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+}
+
+void Render::drawObjects(DrawingLayer layer)
+{
+	for (MyObjectDisplayData* object : _renderObjects[layer])
+	{
+		int renderXPos = object->_position.x * cellSize;
+		int renderYPos = object->_position.y * cellSize;
+
+		SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
+
+		SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
+	}
 }
 
 void Render::tick()
@@ -141,42 +157,11 @@ void Render::tick()
 		//Clear screen
 		SDL_RenderClear(m_Renderer);
 
-		
-		for (MyObjectDisplayData* object : _renderObject)
-		{
-			if (object->_drawLayer == 0)
-			{/*
-				object->destination->h = 50;
-				object->destination->w = 50;
-				object->destination->x = object->_position.x * 50;
-				object->destination->y = object->_position.y * 50;*/
-
-				int renderXPos = object->_position.x * cellSize;
-				int renderYPos = object->_position.y * cellSize;
-
-				SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
-
-				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
-			}
-		}
-
-		for (MyObjectDisplayData* object : _renderObject)
-		{
-			if (object->_drawLayer == 1)
-			{/*
-				object->destination->h = 50;
-				object->destination->w = 50;
-				object->destination->x = object->_position.x * 50;
-				object->destination->y = object->_position.y * 50;*/
-
-				int renderXPos = object->_position.x * cellSize;
-				int renderYPos = object->_position.y * cellSize;
-
-				SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
-
-				SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
-			}
-		}
+		drawObjects(DrawingLayer::Background);
+		drawObjects(DrawingLayer::Floor);
+		drawObjects(DrawingLayer::Game);
+		drawObjects(DrawingLayer::Foreground);
+		drawObjects(DrawingLayer::UI);
 
 		//Update screen
 		SDL_RenderPresent(m_Renderer);

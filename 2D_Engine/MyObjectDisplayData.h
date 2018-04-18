@@ -26,6 +26,15 @@ struct dimension2d
 	int h;
 };
 
+enum class DrawingLayer
+{
+	Background,
+	Floor,
+	Game,
+	Foreground,
+	UI
+};
+
 struct SDL_Texture;
 
 struct ObjectRect
@@ -42,7 +51,7 @@ public:
 
 	position2d _position;
 	dimension2d _dimension;
-	int _drawLayer;
+	DrawingLayer _drawLayer;
 
 	
 	std::string texturePath;

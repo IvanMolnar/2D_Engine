@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <vector>
+#include <map>
 #include "MyObjectDisplayData.h"
 
 class Render
@@ -27,6 +28,8 @@ private:
 	
 	
 	void close();
+
+	void drawObjects(DrawingLayer layer);
 	
 	SDL_Texture* loadTexture(std::string path);
 
@@ -67,6 +70,7 @@ private:
 
 	//std::vector<object> _renderObject;
 
-	std::vector<MyObjectDisplayData*> _renderObject;
+	//std::vector<MyObjectDisplayData*> _renderObject;
+	std::map<DrawingLayer, std::vector<MyObjectDisplayData*>> _renderObjects;
 };
 
