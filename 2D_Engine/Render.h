@@ -25,7 +25,7 @@ public:
 	void loadTexture(MyObjectDisplayData* object);
 
 
-	SDL_Scancode getInput();
+	SDL_Event* getInput();
 
 private:
 	

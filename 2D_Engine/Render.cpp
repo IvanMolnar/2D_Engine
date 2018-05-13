@@ -95,18 +95,13 @@ void Render::loadTexture(MyObjectDisplayData* object)
 	}
 }
 
-SDL_Scancode Render::getInput()
+SDL_Event* Render::getInput()
 {
 	SDL_Event event;
 
 	SDL_WaitEventTimeout(&event, 10);
 	
-	if (event.type == SDL_KEYDOWN)
-	{
-		return event.key.keysym.scancode;
-	}
-
-	return SDL_Scancode::SDL_SCANCODE_UNKNOWN;
+	return &event;
 }
 
 void Render::close()
@@ -135,15 +130,31 @@ void Render::close()
 
 void Render::drawObjects(DrawingLayer layer)
 {
-	for (MyObjectDisplayData* object : _renderObjects[layer])
+	if (layer == DrawingLayer::UI)
 	{
-		int renderXPos = object->_position.x * cellSize;
-		int renderYPos = object->_position.y * cellSize;
+		for (MyObjectDisplayData* object : _renderObjects[layer])
+		{
+			int renderXPos = object->_position.x;
+			int renderYPos = object->_position.y;
 
-		SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
+			SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
 
-		SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
+			SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
+		}
 	}
+	else
+	{
+		for (MyObjectDisplayData* object : _renderObjects[layer])
+		{
+			int renderXPos = object->_position.x * cellSize;
+			int renderYPos = object->_position.y * cellSize;
+
+			SDL_Rect rect = { renderXPos, renderYPos, object->_dimension.w, object->_dimension.w };
+
+			SDL_RenderCopy(m_Renderer, object->gTexture, NULL, &rect);
+		}
+	}
+	
 }
 
 void Render::tick()

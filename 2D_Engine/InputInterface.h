@@ -1,5 +1,5 @@
 #pragma once
-#include "src\Libraries\SDL\include\SDL_scancode.h"
+#include "src\Libraries\SDL\include\SDL_events.h"
 
 namespace InputModuleInfo
 {
@@ -10,6 +10,6 @@ namespace InputModuleInfo
 class InputInterface
 {
 public:
-	virtual SDL_Scancode getInput() = 0;
+	virtual SDL_Event* getInput() = 0;
 	virtual void destroy() = 0;
 };
