@@ -1,8 +1,8 @@
 #pragma once
 
-#include "src\Libraries\SDL\include\SDL.h"
+#include "Libraries\SDL\include\SDL.h"
 #undef main
-#include "src\Libraries\SDL_Image\include\SDL_image.h"
+#include "Libraries\SDL_Image\include\SDL_image.h"
 
 #include <iostream>
 

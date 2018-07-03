@@ -1,22 +1,14 @@
 #include "stdafx.h"
 #include "Render.h"
 
-
-
-
-#pragma comment(lib, "SDL2.lib")
-#pragma comment(lib, "SDL2_image.lib")
-
 Render::Render()
 {
 }
-
 
 Render::~Render()
 {
 	close();
 }
-
 
 bool Render::init()
 {

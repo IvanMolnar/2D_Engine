@@ -1,5 +1,5 @@
 #pragma once
-#include "src\Libraries\SDL\include\SDL_events.h"
+#include "Libraries\SDL\include\SDL_events.h"
 
 namespace InputModuleInfo
 {
