@@ -17,7 +17,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/targetver.h)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${AllFiles})
 
 
-add_library(2D_Engine SHARED
+add_library(2D_Engine MODULE 
     ${AllFiles}
 )
 
