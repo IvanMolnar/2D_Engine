@@ -14,21 +14,21 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/Render.h ${CMAKE_CURRENT_SOURCE_DIR}/src/stdafx.
 ${CMAKE_CURRENT_SOURCE_DIR}/src/targetver.h)
 
 
-source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${AllFiles})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${AllFiles})
 
 
 add_library(2D_Engine SHARED
     ${AllFiles}
 )
 
-include_directories(2D_Engine ${PROJECT_SOURCE_DIR}/src)
+include_directories(2D_Engine ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(LibPathSDL "${PROJECT_SOURCE_DIR}/src/Libraries/SDL/lib/x64")
-    set(LibPathSDL_Image "${PROJECT_SOURCE_DIR}/src/Libraries/SDL_Image/lib/x64")
+    set(LibPathSDL "${CMAKE_CURRENT_SOURCE_DIR}/src/Libraries/SDL/lib/x64")
+    set(LibPathSDL_Image "${CMAKE_CURRENT_SOURCE_DIR}/src/Libraries/SDL_Image/lib/x64")
 else()
-    set(LibPathSDL "${PROJECT_SOURCE_DIR}/src/Libraries/SDL/lib/x86")
-    set(LibPathSDL_Image "${PROJECT_SOURCE_DIR}/src/Libraries/SDL_Image/lib/x64")
+    set(LibPathSDL "${CMAKE_CURRENT_SOURCE_DIR}/src/Libraries/SDL/lib/x86")
+    set(LibPathSDL_Image "${CMAKE_CURRENT_SOURCE_DIR}/src/Libraries/SDL_Image/lib/x64")
 endif()
 
 target_link_libraries(2D_Engine debug ${LibPathSDL}/SDL2.lib)
@@ -37,8 +37,8 @@ target_link_libraries(2D_Engine debug ${LibPathSDL_Image}/SDL2_image.lib)
 target_link_libraries(2D_Engine optimized ${LibPathSDL}/SDL2.lib)
 target_link_libraries(2D_Engine optimized ${LibPathSDL_Image}/SDL2_image.lib)
 
-set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/Bin)
-set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/Bin)
+set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/Bin)
+set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/Bin)
 
 target_compile_features(2D_Engine PUBLIC cxx_std_17)
 
