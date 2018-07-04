@@ -39,8 +39,8 @@ target_link_libraries(2D_Engine optimized ${LibPathSDL_Image}/SDL2_image.lib)
 
 set(Install_Dir ${CMAKE_CURRENT_SOURCE_DIR}/Bin)
 
-set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${Install_Dir})
-set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${Install_Dir})
+set_target_properties( 2D_Engine PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${Install_Dir})
+set_target_properties( 2D_Engine PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${Install_Dir})
 
 target_compile_features(2D_Engine PUBLIC cxx_std_17)
 
