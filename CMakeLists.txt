@@ -37,7 +37,8 @@ target_link_libraries(2D_Engine debug ${LibPathSDL_Image}/SDL2_image.lib)
 target_link_libraries(2D_Engine optimized ${LibPathSDL}/SDL2.lib)
 target_link_libraries(2D_Engine optimized ${LibPathSDL_Image}/SDL2_image.lib)
 
-set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
+set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/Bin)
+set_target_properties( 2D_Engine PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/Bin)
 
 target_compile_features(2D_Engine PUBLIC cxx_std_17)
 
