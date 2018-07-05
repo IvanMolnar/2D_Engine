@@ -77,7 +77,7 @@ void Render::initObject(MyObjectDisplayData* object)
 void Render::loadTexture(MyObjectDisplayData* object)
 {
 	//Load PNG texture
-	object->gTexture = loadTexture("..\\DesignPatternDemo\\textures\\" + object->texturePath);
+	object->gTexture = loadTexture("textures\\" + object->texturePath);
 
 	if (object->gTexture == NULL)
 	{
